@@ -51,6 +51,10 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
+    $routes->connect('/login', ['controller' => 'Users', 'action' => 'login', 'prefix' => 'admin']);
+
+
+
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
@@ -72,6 +76,13 @@ Router::scope('/', function (RouteBuilder $routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
+    $routes->fallbacks(DashedRoute::class);
+});
+
+Router::prefix('admin', function (RouteBuilder $routes) {
+    $routes->resources('Users');
+    $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+
     $routes->fallbacks(DashedRoute::class);
 });
 
