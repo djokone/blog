@@ -50,7 +50,7 @@ class Users extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('modified', 'datetime', [
+        $table->addColumn('updated', 'datetime', [
             'default' => null,
             'null' => false,
         ]);
