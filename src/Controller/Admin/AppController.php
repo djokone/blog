@@ -41,7 +41,8 @@ class AppController extends Controller
             'controller' => 'Pages',
             'action' => 'display',
             'home'
-        ]
+        ],
+        'unauthorizedRedirect' => '/',
     ]);
 
         /*
@@ -64,6 +65,9 @@ class AppController extends Controller
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
+        }
+        if ($this->request->params['prefix'] === "admin") {
+            $this->viewBuilder()->layout('admin');
         }
     }
 

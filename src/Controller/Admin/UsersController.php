@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use Cake\Event\Event;
 
 /**
  * Users Controller
@@ -10,6 +11,57 @@ use App\Controller\Admin\AppController;
  */
 class UsersController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['add', 'logout']);
+    }
+
+
+    /**
+     * Login method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            // debug($user);die();
+            if ($user) {
+                $this->Auth->setUser($user);
+                if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
+                    $user = $this->Users->get($this->Auth->user('id'));
+                    $user->password2 = $this->request->data('password');
+                    $user->password1 = $this->request->data('password');
+                    $this->Users->save($user);
+                }
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->redirect($this->referer());
+            }
+        } 
+    }
+
+    /**
+     * logout method
+     *
+     * @param string|null $id User id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function logout($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+
+        $this->set('user', $user);
+        $this->set('_serialize', ['user']);
+    }
 
     /**
      * Index method
