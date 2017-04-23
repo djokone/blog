@@ -1,3 +1,7 @@
+# NodeJs
+
+/node_modules/*
+
 # CakePHP 3
 
 /vendor/*

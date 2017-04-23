@@ -32,6 +32,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <link rel="stylesheet" href="<?= $this->Assets->path('app.css'); ?>">
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -53,5 +54,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </div>
     <footer>
     </footer>
+    <script src="<?= $this->Assets->path('app.js'); ?>"></script>
 </body>
 </html>

@@ -40,10 +40,11 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
     <?= $this->Html->css('home.css') ?>
+    <link rel="stylesheet" href="<?= $this->Asset->path('app.css'); ?>">
     <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
 </head>
 <body class="home">
-
+<div id="app">
 <header class="row">
     <div class="header-image"><?= $this->Html->image('cake.logo.svg') ?></div>
     <div class="header-title">
@@ -271,6 +272,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         </ul>
     </div>
 </div>
-
+    
+</div>
+<script src="<?= $this->Asset->path('app.js'); ?>"></script>
 </body>
 </html>
